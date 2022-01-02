@@ -36,7 +36,11 @@
 
   <div class="intro">
     <p>
-      Github: <a href="https://svelte.dev">https://svelte.dev</a>
+      <a
+        href="https://github.com/masapochi/laravel-svelte-vite-typescript-api-boilerplate"
+      >
+        Github
+      </a>
     </p>
   </div>
 
