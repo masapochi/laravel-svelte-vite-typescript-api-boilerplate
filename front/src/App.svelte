@@ -2,6 +2,10 @@
   import http from "@/http";
   import Counter from "./lib/Counter.svelte";
 
+  import { Router, Link, Route, link } from "svelte-navigator";
+  import About from "@/pages/About.svelte";
+  import Contact from "@/pages/Contact.svelte";
+
   import SvelteLogo from "./assets/svelte.svg";
   import LaravelLogo from "./assets/laravel.svg";
   import TsLogo from "./assets/typescript.svg";
@@ -44,24 +48,42 @@
     </p>
   </div>
 
-  <div class="counter">
-    <Counter />
-  </div>
+  <Router primary={false}>
+    <nav class="router" role="navigation">
+      <ul>
+        <li><a href="/" use:link>Home</a></li>
+        <li><a href="/about" use:link>About</a></li>
+        <li><a href="/contact" use:link>Contact</a></li>
+      </ul>
+    </nav>
 
-  {#await promise}
-    <p class="loading">... Fetching Photos</p>
-  {:then photos}
-    <ul class="photo_list">
-      {#each photos.data as photo, i}
-        <li class="photo_item">
-          <img src={photo.url} alt={photo.title} />
-          <p>{photo.title}</p>
-        </li>
-      {/each}
-    </ul>
-  {:catch error}
-    <p>{error}</p>
-  {/await}
+    <Route path="/">
+      <div class="counter">
+        <Counter />
+      </div>
+
+      {#await promise}
+        <p class="loading">... Fetching Photos</p>
+      {:then photos}
+        <ul class="photo_list">
+          {#each photos.data as photo, i}
+            <li class="photo_item">
+              <img src={photo.url} alt={photo.title} />
+              <p>{photo.title}</p>
+            </li>
+          {/each}
+        </ul>
+      {:catch error}
+        <p>{error}</p>
+      {/await}
+    </Route>
+    <Route path="/about">
+      <About />
+    </Route>
+    <Route path="/contact">
+      <Contact />
+    </Route>
+  </Router>
 </main>
 
 <style lang="scss">
@@ -94,6 +116,32 @@
       margin-bottom: 3rem;
     }
 
+    .router {
+      margin-bottom: 3rem;
+      ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        li {
+          padding: 0.5rem;
+
+          a {
+            font-family: inherit;
+            font-size: inherit;
+            padding: 1em 2em;
+            color: #ff3e00;
+            background-color: rgba(255, 62, 0, 0.1);
+            border-radius: 2em;
+            border: 2px solid rgba(255, 62, 0, 0);
+            outline: none;
+            width: 200px;
+            font-variant-numeric: tabular-nums;
+            text-decoration: none;
+            cursor: pointer;
+          }
+        }
+      }
+    }
     .counter {
       margin-bottom: 3rem;
     }
