@@ -1,0 +1,7 @@
+{
+  "useTabs": false, // インデントをスペースで指定、Noタブ
+  "semi": true, // ステートメントの終わりにセミコロン（;）を使う
+  "trailingComma": "all", // オブジェクトなどの末尾のカンマ（,）を有効化
+  "singleQuote": true, // "hoge"ではなく'hoge'を使う
+  "tabWidth": 2 // コードのインデントを2にする
+}
